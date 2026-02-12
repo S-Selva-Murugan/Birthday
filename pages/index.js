@@ -22,7 +22,6 @@ export default function Home() {
   const [paintingsColored, setPaintingsColored] = useState([])
   const [suggestions, setSuggestions] = useState(['', '', '', '', ''])
   const [suggestionsSaved, setSuggestionsSaved] = useState(false)
-  const touchStartY = useRef(null)
   const containerRef = useRef(null)
 
   const memories = [
@@ -152,20 +151,7 @@ export default function Home() {
     setIndex(i)
   }
 
-  function handleTouchStart(e) {
-    touchStartY.current = e.touches ? e.touches[0].clientY : e.clientY
-  }
-
-  function handleTouchEnd(e) {
-    if (!touchStartY.current) return
-    const endY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY
-    const diff = touchStartY.current - endY
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) next()
-      else prev()
-    }
-    touchStartY.current = null
-  }
+  // swipe navigation disabled — use the on-screen buttons (prev/next) or dots
 
   useEffect(() => {
     // initialize painting states when entering the paintings section
@@ -212,10 +198,6 @@ export default function Home() {
         <div
           className="story-container"
           ref={containerRef}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onMouseDown={handleTouchStart}
-          onMouseUp={handleTouchEnd}
         >
           <div className="story-card" key={index}>
             {sections[index].type === 'hero' && (
