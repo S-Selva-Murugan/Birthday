@@ -24,6 +24,7 @@ body{
 
 .site-header{display:flex;flex-direction:column;align-items:center;padding:2rem 1rem}
 .logo{display:flex;align-items:center;gap:.75rem}
+.logo-badge{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#ff9fb3);display:inline-block}
 .logo-heart{width:44px;height:44px}
 .site-header h1{margin:0;font-size:1.25rem;letter-spacing:0.4px}
 .sub{margin:0;margin-top:.35rem;color:var(--muted)}
@@ -52,6 +53,21 @@ body{
   0%{transform:translateY(110vh) translateX(0) scale(0.95)}
   50%{transform:translateY(40vh) translateX(10px) scale(1.05)}
   100%{transform:translateY(-20vh) translateX(-10px) scale(1)}
+}
+
+/* bunting banner */
+.bunting{position:fixed;left:50%;transform:translateX(-50%);top:8px;display:flex;gap:8px;z-index:120;pointer-events:none}
+.flag{width:42px;height:30px;border-radius:4px;display:inline-block;clip-path:polygon(0 0,100% 0,80% 100%,20% 100%);box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+.flag.f1{background:linear-gradient(180deg,#ffd1dc,#ffb0c1)}
+.flag.f2{background:linear-gradient(180deg,#fff2d1,#ffd7a6)}
+.flag.f3{background:linear-gradient(180deg,#d1f7ff,#a6e6ff)}
+.flag.f4{background:linear-gradient(180deg,#d6ffd1,#a6f7a6)}
+.flag.f5{background:linear-gradient(180deg,#f0d1ff,#e2b0ff)}
+.flag.f6{background:linear-gradient(180deg,#ffd1d1,#ffb0b0)}
+
+@media (max-width:700px){
+  .bunting{top:6px}
+  .flag{width:34px;height:26px}
 }
 
 /* small screens */
@@ -115,7 +131,7 @@ body{
 
   .hero-inner h2{font-size:1.6rem}
 
-  .site-header{padding:.75rem 1rem}
+  .site-header{margin-top: 15px;}
   .site-header h1{font-size:1rem}
 
   
@@ -132,7 +148,7 @@ body{
 
 /* Story-style navigation */
 .story-root{position:relative}
-.story-container{min-height:calc(100vh - 88px);display:flex;align-items:center;justify-content:center;padding:1.25rem}
+.story-container{min-height:calc(100vh - 140px);display:flex;align-items:center;justify-content:center;padding:1.25rem}
 .story-card{width:100%;max-width:940px;background:rgba(255,255,255,0.95);border-radius:14px;padding:1.25rem;display:flex;align-items:center;justify-content:center;min-height:60vh;box-shadow:0 18px 40px rgba(0,0,0,0.06)}
 .story-controls{position:fixed;left:0;right:0;bottom:22px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:60}
 .story-controls .nav{background:rgba(255,255,255,0.9);border:0;padding:10px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.08);cursor:pointer}

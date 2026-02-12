@@ -327,6 +327,7 @@ export default function Home() {
             {sections[index].type === 'promise' && (
               <div className="promise-card">
                 <div className="promise-text">
+                  <p>I know I made our relationship harder than it needed to be… but I’m here to fix, not repeat.</p>
                   <p>I’ll do whatever it takes to see you smile — not perfectly, but sincerely, every day.</p>
                   <p>You’ve always been my queen, even on the days I didn’t act like it enough.</p>
                   <p>For the times I was stubborn, confusing, or just a headache… I’m really sorry.</p>
