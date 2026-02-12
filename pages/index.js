@@ -9,6 +9,7 @@ import FinalWish from '../components/FinalWish'
 import Confetti from '../components/Confetti'
 import LoveMeter from '../components/LoveMeter'
 import ProposalSection from '../components/Proposal'
+import LandingIntro from '../components/LandingInto'
 
 export default function Home() {
   const router = useRouter()
@@ -52,6 +53,7 @@ export default function Home() {
 
   // sections: hero, memory1, question1, memory2, memory3, final
   const sections = [
+    { type: 'intro' },
     { type: 'hero' },
     { type: 'memory', data: memories[0] },
     {
@@ -75,6 +77,10 @@ export default function Home() {
     { type: 'final' },
   ]
 
+const heroIndex = sections.findIndex(s => s.type === 'hero')
+const questionIndex = sections.findIndex(s => s.type === 'question')
+
+
   useEffect(() => {
     function onKey(e) {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next()
@@ -86,22 +92,34 @@ export default function Home() {
 
   // swipe navigation disabled — we do not auto-advance pages by timeout anymore
 
-  function next() {
-    // prevent skipping the first question unless answered correctly
-    setFeedback('')
-    setIndex(i => {
-      if (i === 0 && !answeredCorrect) {
-        setFeedback('Please answer the question correctly to continue.')
-        return i
-      }
-      // block moving past the question page (index 2) until second question is answered
-      if (i === 2 && !answeredCorrect2) {
-        setFeedback2('Please answer this question to continue.')
-        return i
-      }
-      return Math.min(i + 1, sections.length - 1)
-    })
-  }
+function next() {
+  setFeedback('')
+
+  setIndex(i => {
+    // block leaving hero until first MCQ answered
+    if (i === heroIndex && !answeredCorrect) {
+      setFeedback('Please answer the question correctly to continue.')
+      return i
+    }
+
+    // block leaving second question page
+    if (i === questionIndex && !answeredCorrect2) {
+      setFeedback2('Please answer this question to continue.')
+      return i
+    }
+
+    return Math.min(i + 1, sections.length - 1)
+  })
+}
+
+function resetSuggestions() {
+  const empty = ['', '', '', '', '']
+  setSuggestions(empty)
+  setSuggestionsSaved(false)
+  try {
+    window.localStorage.removeItem('namitha_suggestions')
+  } catch (err) {}
+}
 
   // Load saved suggestions from localStorage when entering the suggestions section
   useEffect(() => {
@@ -144,20 +162,19 @@ export default function Home() {
     setIndex(i => Math.max(i - 1, 0))
   }
 
-  function goTo(i) {
-    // if trying to go forward from the first question without answering correctly, block
-    if (index === 0 && i > 0 && !answeredCorrect) {
-      setFeedback('Please answer the question correctly to continue.')
-      return
-    }
-    // if trying to jump past the question (section index 2) without answering it, block
-    if (i > 2 && !answeredCorrect2) {
-      setFeedback2('Please answer this question to continue.')
-      return
-    }
-    setFeedback('')
-    setIndex(i)
+function goTo(i) {
+  if (index === heroIndex && i > heroIndex && !answeredCorrect) {
+    setFeedback('Please answer the question correctly to continue.')
+    return
   }
+
+  if (index === questionIndex && i > questionIndex && !answeredCorrect2) {
+    setFeedback2('Please answer this question to continue.')
+    return
+  }
+
+  setIndex(i)
+}
 
   // swipe navigation disabled — use the on-screen buttons (prev/next) or dots
 
@@ -169,33 +186,34 @@ export default function Home() {
     }
   }, [index])
 
-  function handlePaintClick(i) {
-    // Update local copy first so we can check completion immediately
-    setPaintingsColored(prev => {
-      const updated = prev && prev.length ? prev.slice() : []
-      // initialize if needed
-      if (updated.length === 0 && sections[index] && sections[index].type === 'paintings') {
-        for (let k = 0; k < sections[index].data.images.length; k++) updated[k] = false
-      }
-      if (updated[i]) return updated
-      updated[i] = true
+function handlePaintClick(i) {
+  setPaintingsColored(prev => {
+    const updated = prev && prev.length ? prev.slice() : []
 
-      // if all paintings are now colored, celebrate and advance
-      const allColored = updated.every(Boolean)
-      if (allColored) {
-        setShowConfetti(true)
-  setTimeout(() => setShowConfetti(false), 1600)
-  next()
-      }
+    if (updated.length === 0 && sections[index]?.type === 'paintings') {
+      for (let k = 0; k < sections[index].data.images.length; k++) updated[k] = false
+    }
 
-      return updated
-    })
-  }
+    if (updated[i]) return updated
+    updated[i] = true
+
+    const allColored = updated.every(Boolean)
+
+    if (allColored) {
+      setShowConfetti(true)
+      setTimeout(() => setShowConfetti(false), 1600)
+      // ❌ removed next()
+    }
+
+    return updated
+  })
+}
+
 
   return (
     <>
       <Head>
-        <title>Hey {name} — a little story</title>
+        <title> For my birthday girl </title>
         <meta name="description" content={`A gentle time-travel of memories for ${name}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -210,9 +228,9 @@ export default function Home() {
           <div className="story-card" key={index}>
             {sections[index].type === 'hero' && (
               <div className="hero-inner">
-                <h2>Hey {name}, this is not just a website…</h2>
-                <p className="lead">lets play the game and travel through our memories.</p>
-                <p className="hint">Use the buttons or swipe left/right (mobile).</p>
+                {/* <h2>Hey {name}, this is not just a website…</h2> */}
+                {/* <p className="lead">lets play the game and travel through our memories.</p> */}
+                <p className="hint">Lets start with a quiz.</p>
 
                 <div className="mcq">
                   <p className="question">Where did you see me for the first time?</p>
@@ -265,6 +283,13 @@ export default function Home() {
               </>
             )}
 
+            {sections[index].type === 'intro' && (
+              <LandingIntro
+                name={name}
+                onStart={() => setIndex(heroIndex)}
+              />
+            )}
+
             {sections[index].type === 'paintings' && (
               <div className="paintings-card">
                 <h3>Bring these paintings to life by clicking on them.</h3>
@@ -308,11 +333,22 @@ export default function Home() {
 
                 <div className="suggestions-actions">
                   {!suggestionsSaved ? (
-                    <button className="reveal-btn" onClick={saveSuggestions}>Save</button>
+                    <button className="reveal-btn" onClick={saveSuggestions}>
+                      Save
+                    </button>
                   ) : (
                     <>
-                      <button className="reveal-btn" onClick={editSuggestions}>Edit</button>
-                      <button className="reveal-inline-btn" onClick={() => next()}>Continue</button>
+                      <button className="reveal-btn" onClick={editSuggestions}>
+                        Edit
+                      </button>
+
+                      <button
+                        className="reveal-btn"
+                        style={{ background: "#999" }}
+                        onClick={resetSuggestions}
+                      >
+                        Reset
+                      </button>
                     </>
                   )}
                 </div>
@@ -409,15 +445,12 @@ export default function Home() {
               )}
           </div>
 
+        {sections[index].type !== 'intro' && (
           <div className="story-controls">
             <button className="nav prev" onClick={prev} aria-label="Previous">◀</button>
-            <div className="dots">
-              {sections.map((s, i) => (
-                <button key={i} className={`dot ${i === index ? 'active' : ''}`} onClick={() => goTo(i)} aria-label={`Go to step ${i + 1}`} />
-              ))}
-            </div>
             <button className="nav next" onClick={next} aria-label="Next">▶</button>
           </div>
+        )}
         </div>
 
   <Confetti show={showConfetti} />

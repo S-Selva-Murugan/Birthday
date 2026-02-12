@@ -29,7 +29,7 @@ export default function ProposalSection({ img, successGif, onYes }) {
         style={{
           maxWidth: "500px",
           width: "100%",
-          padding: "2rem",
+          padding: "0.5rem",
           borderRadius: "24px",
           boxShadow: "0 10px 35px rgba(0,0,0,0.12)",
           background: "white"
