@@ -7,6 +7,7 @@ import MemorySection from '../components/MemorySection'
 import FinalWish from '../components/FinalWish'
 // Hearts3D removed per request
 import Confetti from '../components/Confetti'
+import LoveMeter from '../components/LoveMeter'
 
 export default function Home() {
   const router = useRouter()
@@ -244,12 +245,16 @@ export default function Home() {
 
             {sections[index].type === 'memory' && (
               <>
-                <MemorySection
-                  title={sections[index].data.title}
-                  img={sections[index].data.img}
-                  caption={sections[index].data.caption}
-                  joke={sections[index].data.joke}
-                />
+                {sections[index].data.id === 3 ? (
+                  <LoveMeter />
+                ) : (
+                  <MemorySection
+                    title={sections[index].data.title}
+                    img={sections[index].data.img}
+                    caption={sections[index].data.caption}
+                    joke={sections[index].data.joke}
+                  />
+                )}
               </>
             )}
 
