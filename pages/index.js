@@ -8,6 +8,7 @@ import FinalWish from '../components/FinalWish'
 // Hearts3D removed per request
 import Confetti from '../components/Confetti'
 import LoveMeter from '../components/LoveMeter'
+import ProposalSection from '../components/Proposal'
 
 export default function Home() {
   const router = useRouter()
@@ -67,6 +68,10 @@ export default function Home() {
     { type: 'suggestions' },
     { type: 'promise' },
     { type: 'memory', data: memories[2] },
+    { type: 'ask' },
+    { type: 'hesitant' },
+    { type: 'nervous' },
+    { type: 'proposal' }, 
     { type: 'final' },
   ]
 
@@ -314,6 +319,14 @@ export default function Home() {
               </div>
             )}
 
+            {sections[index].type === 'proposal' && (
+              <ProposalSection
+                img="/photos/photo6.png"
+                successGif="/photos/photo6.gif"
+                onYes={() => next()}
+              />
+            )}
+
             {sections[index].type === 'final' && <FinalWish name={name} />}
             {sections[index].type === 'promise' && (
               <div className="promise-card">
@@ -370,6 +383,30 @@ export default function Home() {
                 {feedback2 && <p className="mcq-feedback">{feedback2}</p>}
               </div>
             )}
+              {sections[index].type === 'ask' && (
+                <div className="ask-card">
+                  <div className="ask-text">
+                    <p>Everything you saw here is from the past.</p>
+                    <p>I want to ask you something I mean with all my heart.</p>
+                  </div>
+                </div>
+              )}
+              {sections[index].type === 'hesitant' && (
+                <div className="hesitant-card">
+                  <div className="hesitant-text">
+                    <p>Okay… wait… give me a second.</p>
+                    <p>I actually practiced this in my head many times.</p>
+                    <p>It sounded smooth there.</p>
+                    <p>Right now… not so much.</p>
+                  </div>
+                </div>
+              )}
+
+              {sections[index].type === 'nervous' && (
+                <div className="nervous-card">
+                  <div className="nervous-emoji">😬</div>
+                </div>
+              )}
           </div>
 
           <div className="story-controls">
