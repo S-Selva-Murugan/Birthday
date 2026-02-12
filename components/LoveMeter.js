@@ -45,7 +45,7 @@ export default function LoveMeter() {
       <div className="emoji-row">{emoji}</div>
 
       {isOverflow && (
-        <div className="error-box">Tried measuring it. System not designed for this much.</div>
+        <div className="error-box">Woooooooo. System not designed for this much.</div>
       )}
 
       <div className="love-response">{response}</div>
