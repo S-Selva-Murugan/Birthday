@@ -79,6 +79,8 @@ export default function Home() {
     return () => window.removeEventListener('keydown', onKey)
   }, [index])
 
+  // swipe navigation disabled — we do not auto-advance pages by timeout anymore
+
   function next() {
     // prevent skipping the first question unless answered correctly
     setFeedback('')
@@ -177,8 +179,8 @@ export default function Home() {
       const allColored = updated.every(Boolean)
       if (allColored) {
         setShowConfetti(true)
-        setTimeout(() => setShowConfetti(false), 1600)
-        setTimeout(() => next(), 900)
+  setTimeout(() => setShowConfetti(false), 1600)
+  next()
       }
 
       return updated
@@ -226,7 +228,7 @@ export default function Home() {
                             // show confetti and hearts pulse briefly
                             setShowConfetti(true)
                             setTimeout(() => setShowConfetti(false), 2200)
-                            setTimeout(() => next(), 900)
+                            // do not auto-advance; require user to use pagination
                           } else {
                             setAnsweredCorrect(false)
                             setFeedback('Not quite — try again!')
@@ -351,8 +353,8 @@ export default function Home() {
                             setAnsweredCorrect2(true)
                             setFeedback2('Nice! Advancing to the next memory...')
                             setShowConfetti(true)
-                            setTimeout(() => setShowConfetti(false), 2000)
-                            setTimeout(() => next(), 900)
+                              setTimeout(() => setShowConfetti(false), 2000)
+                              // do not auto-advance; require user to use pagination
                           } else {
                             setAnsweredCorrect2(false)
                             setFeedback2('Nope — try again!')
