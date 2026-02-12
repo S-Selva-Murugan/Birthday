@@ -40,7 +40,7 @@ export default function LandingIntro({ name, onStart }) {
           background: "white",
           padding: "2.5rem",
           borderRadius: "24px",
-          boxShadow: "0 10px 40px rgba(0,0,0,0.12)"
+        //   boxShadow: "0 10px 40px rgba(0,0,0,0.12)"
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>

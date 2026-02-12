@@ -445,12 +445,12 @@ function handlePaintClick(i) {
               )}
           </div>
 
-        {sections[index].type !== 'intro' && (
-          <div className="story-controls">
-            <button className="nav prev" onClick={prev} aria-label="Previous">◀</button>
-            <button className="nav next" onClick={next} aria-label="Next">▶</button>
-          </div>
-        )}
+{!['intro', 'proposal', 'final'].includes(sections[index].type) && (
+  <div className="story-controls">
+    <button className="nav prev" onClick={prev} aria-label="Previous">◀</button>
+    <button className="nav next" onClick={next} aria-label="Next">▶</button>
+  </div>
+)}
         </div>
 
   <Confetti show={showConfetti} />
