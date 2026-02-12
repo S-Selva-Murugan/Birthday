@@ -249,23 +249,7 @@ export default function Home() {
                   img={sections[index].data.img}
                   caption={sections[index].data.caption}
                   joke={sections[index].data.joke}
-                >
-                  {sections[index].data.id === 1 && (
-                    <div className="reveal-inline">
-                      <button className="reveal-inline-btn" onClick={() => goTo(index + 1)}>
-                        Click here to move to the next part of our journey
-                      </button>
-                    </div>
-                  )}
-
-                  {sections[index].data.id === 2 && (
-                    <div className="reveal-inline">
-                      <button className="reveal-inline-btn" onClick={() => goTo(index + 1)}>
-                        Click here to move to the next part of our journey
-                      </button>
-                    </div>
-                  )}
-                </MemorySection>
+                />
               </>
             )}
 
