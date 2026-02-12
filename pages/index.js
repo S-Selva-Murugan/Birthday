@@ -64,8 +64,8 @@ export default function Home() {
     { type: 'memory', data: memories[1] },
     { type: 'paintings', data: { images: ['/photos/photo3.jpeg', '/photos/photo4.jpeg', '/photos/photo5.jpeg'] } },
     { type: 'suggestions' },
-    { type: 'memory', data: memories[2] },
     { type: 'promise' },
+    { type: 'memory', data: memories[2] },
     { type: 'final' },
   ]
 
