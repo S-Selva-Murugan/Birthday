@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#FFF5E6"/>
+  <g transform="translate(40,40)">
+    <rect width="720" height="520" rx="14" fill="#fff" stroke="#fff0e6"/>
+    <text x="360" y="260" font-family="Arial, Helvetica, sans-serif" font-size="32" fill="#b36b2e" text-anchor="middle">Photo 2</text>
+    <text x="360" y="300" font-family="Arial" font-size="14" fill="#6b6b6b" text-anchor="middle">(placeholder)</text>
+  </g>
+</svg>
