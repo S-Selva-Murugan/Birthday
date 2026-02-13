@@ -38,7 +38,7 @@ export default function LandingIntro({ name, onStart }) {
           maxWidth: "560px",
           width: "100%",
           background: "white",
-          padding: "2.5rem",
+          // padding: "2.5rem",
           borderRadius: "24px",
         //   boxShadow: "0 10px 40px rgba(0,0,0,0.12)"
         }}
