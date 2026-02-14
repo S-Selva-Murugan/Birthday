@@ -122,7 +122,7 @@ body{
 .reveal-inline-btn:active{transform:translateY(1px)}
 
 
-.final-card{max-width:720px;background:rgba(255,255,255,0.95);padding:2rem;border-radius:14px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,0.06)}
+.final-card{max-width:720px;background:rgba(255,255,255,0.95);padding:2rem;border-radius:14px;text-align:center;}
 .final-card h2{color:var(--accent);margin-bottom:.4rem}
 .final-card .tease{color:#333}
 .final-card .wish{color:#3b2a3d}
@@ -170,7 +170,7 @@ body{
   /* keep balloons visible on mobile but smaller */
   .balloon{font-size:1.4rem}
 
-  .final-card{padding:1.25rem}
+  /* .final-card{padding:1.25rem} */
 }
 
 /* Story-style navigation */
