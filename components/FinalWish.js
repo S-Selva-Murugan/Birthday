@@ -8,14 +8,14 @@ export default function FinalWish({ name }) {
   return (
     <div className="final-card">
 
-      <div
-        style={{
-          position: "relative",
-          width: "220px",
-          height: "220px",
-          marginBottom: "20px"
-        }}
-      >
+          <div
+            style={{
+              position: "relative",
+              width: "220px",
+              height: "220px",
+              margin: "0 auto 20px auto"
+            }}
+          >
         {/* Loader */}
         {!loaded && (
           <div className="media-loader">
