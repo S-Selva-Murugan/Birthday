@@ -150,7 +150,7 @@ body{
 .story-root{position:relative}
 .story-container{min-height:calc(100vh - 140px);display:flex;align-items:center;justify-content:center;padding:1.25rem}
 .story-card{width:100%;max-width:940px;background:rgba(255,255,255,0.95);border-radius:14px;padding:1.25rem;display:flex;align-items:center;justify-content:center;min-height:60vh;box-shadow:0 18px 40px rgba(0,0,0,0.06)}
-.story-controls{position:fixed;left:0;right:0;bottom:22px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:60}
+.story-controls{position:fixed;left:0;right:0;bottom:22px;display:flex;align-items:center;justify-content:center;gap:200px;z-index:60}
 .story-controls .nav{background:rgba(255,255,255,0.9);border:0;padding:10px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.08);cursor:pointer}
 .story-controls .nav:active{transform:translateY(1px)}
 .dot{width:10px;height:10px;border-radius:10px;background:#eee;border:0}
