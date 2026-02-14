@@ -9,8 +9,8 @@ import MemorySection from '../components/MemorySection'
 import FinalWish from '../components/FinalWish'
 import Confetti from '../components/Confetti'
 import LoveMeter from '../components/LoveMeter'
-import ProposalSection from '../components/Proposal'
 import LandingIntro from '../components/LandingInto'
+import { questions, memories, sections } from '../data/storyData'
 
 export default function Home() {
   const router = useRouter()
@@ -22,42 +22,6 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState(['', '', '', '', ''])
   const [suggestionsSaved, setSuggestionsSaved] = useState(false)
   const containerRef = useRef(null)
-
-  const memories = [
-    { id: 1, title: 'Our First Pic', img: '/photos/photo1.jpg', caption: "This is the first pic we took together — thanks for loving this coconut-head boy!", joke: "I wish I could relive this moment 🤭" },
-    { id: 2, title: 'Hangouts during college days', img: '/photos/photo2.jpeg', caption: 'Very rarely we used to go out and then earth hit with covid quarantine', joke: 'Without you, I would have lived… but I wouldn’t have felt alive the way I do now.' },
-    { id: 3, title: 'Surprise Picnic', img: '/photos/photo3.svg', caption: 'Blanket, cupcakes, and the worst playlist I made', joke: 'You pretended to love my playlist — bless you' },
-    { id: 4, title: 'Surprise Picnic2', img: '/photos/photo3.svg', caption: 'Blanket, cupcakes, and the worst playlist I made', joke: 'You pretended to love my playlist — bless you' },
-    { id: 5, title: 'Surprise Picnic3', img: '/photos/photo3.svg', caption: 'Blanket, cupcakes, and the worst playlist I made', joke: 'You pretended to love my playlist — bless you' }
-  ]
-
-  const questions = [
-    { id: 'first-meet', question: 'Where did you see me for the first time?', options: ['my home', 'your home', 'library', 'playground'], correctIndex: 2 },
-    { id: 'saw-her-first', question: 'Where I saw her first?', options: ['school', 'my home entrance', 'tution', 'your home'], correctIndex: 1 },
-    { id: 'food', question: 'My favourite food?', options: ['biryani', 'dosa', 'shawarma', 'pizza'], correctIndex: 0 },
-    { id: 'movie', question: 'First movie we watched together?', options: ['Leo', 'Master', 'Love Today', '96'], correctIndex: 2 },
-    { id: 'nickname', question: 'What nickname I call you?', options: ['kutty', 'papa', 'chellam', 'all'], correctIndex: 3 }
-  ]
-
-  const sections = [
-    { type: 'intro' },
-    { type: 'question', qIndex: 0 },
-    { type: 'memory', data: memories[0] },
-    { type: 'question', qIndex: 1 },
-    { type: 'memory', data: memories[1] },
-    { type: 'question', qIndex: 2 },
-    { type: 'memory', data: memories[2] },
-    { type: 'question', qIndex: 3 },
-    { type: 'memory', data: memories[3] },
-    { type: 'question', qIndex: 4 },
-    { type: 'memory', data: memories[4] },
-    { type: 'result' },
-    { type: 'paintings', data: { images: ['/photos/photo3.jpeg', '/photos/photo4.jpeg', '/photos/photo5.jpeg'] } },
-    { type: 'suggestions' },
-    { type: 'promise' },
-    { type: 'memory', data: memories[2] },
-    { type: 'final' }
-  ]
 
   const totalQuestions = questions.length
   const correctCount = Object.values(answers).filter(Boolean).length
@@ -80,11 +44,12 @@ export default function Home() {
     const updated = prev && prev.length ? [...prev] : []
 
     // initialize if empty (safety)
-    if (updated.length === 0 && sections[index]?.type === 'paintings') {
-      for (let k = 0; k < sections[index].data.images.length; k++) {
-        updated[k] = false
-      }
-    }
+if (updated.length === 0 && sections[index]?.type === 'paintings') {
+  for (let k = 0; k < sections[index].images.length; k++) {
+    updated[k] = false
+  }
+}
+
 
     if (updated[i]) return updated
 
@@ -158,7 +123,9 @@ function resetSuggestions() {
             })()}
 
             {sections[index].type === 'memory' && (
-              index > resultIndex ? <LoveMeter /> : <MemorySection {...sections[index].data} />
+              index > resultIndex
+                ? <LoveMeter />
+                : <MemorySection {...memories[sections[index].mIndex]} />
             )}
 
             {sections[index].type === 'result' && (
@@ -168,13 +135,13 @@ function resetSuggestions() {
                 <p>{correctCount === 5 ? 'Okay wow… you remember everything 🥹❤️' : correctCount >= 3 ? 'You know me pretty well 😌' : correctCount >= 1 ? 'We need more dates clearly 😏' : 'I refuse to believe this 😤'}</p>
               </div>
             )}
-            {sections[index].type === 'paintings' && (
+{sections[index].type === 'paintings' && (
   <div className="paintings-card">
     <h3>Bring these paintings to life by clicking on them.</h3>
     <p className="hint">This is how you add color to my life.</p>
 
     <div className="paintings-grid">
-      {sections[index].data.images.map((src, i) => (
+      {sections[index].images.map((src, i) => (
         <div
           key={i}
           className={`painting ${paintingsColored[i] ? 'colored' : ''}`}
@@ -220,18 +187,25 @@ function resetSuggestions() {
     </div>
   </div>
 )}
-{sections[index].type === 'promise' && (
-  <div className="promise-card">
-    <div className="promise-text">
-      <p>I know I made things harder than needed… but I’m here to fix, not repeat.</p>
-      <p>I don’t want to win arguments, I want to keep us.</p>
-      <p>I’ll learn you, understand you, and grow with you.</p>
-      <p>I choose you — even on difficult days.</p>
-      <p>I’m not promising perfection, I’m promising effort.</p>
-    </div>
-  </div>
-)}
-
+      {sections[index].type === 'promise' && (
+        <div className="promise-card">
+          <div className="promise-text">
+            <p>I know I made our relationship harder than it needed to be… but I’m here to fix, not repeat.</p>
+            <p>I’ll do whatever it takes to see you smile — not perfectly, but sincerely, every day.</p>
+            <p>You’ve always been my queen, even on the days I didn’t act like it enough.</p>
+            <p>For the times I was stubborn, confusing, or just a headache… I’m really sorry.</p>
+            <p>I’m still learning, and I promise I’ll keep learning you — what hurts you, what comforts you, what matters to you.</p>
+            <p>I may not always understand immediately, but I will never stop trying to understand.</p>
+            <p>I don’t want to win arguments, I want to keep us.</p>
+            <p>I’ll grow, adjust, and become better — not because you asked, but because you deserve that effort.</p>
+            <p>Even on difficult days, I choose you… calmly, loudly, and always.</p>
+            <p>I’m not promising perfection, I’m promising intention.</p>
+            <p>I won’t take your patience or your love for granted again.</p>
+            <p>You are not just part of my life — you are the way I want to live it.</p>
+            <p>So if I ever fall short again, remind me… I’ll come back to you every time.</p>
+          </div>
+        </div>
+      )}
 
             {sections[index].type === 'intro' && (
               <LandingIntro name={name} onStart={() => setIndex(1)} />
