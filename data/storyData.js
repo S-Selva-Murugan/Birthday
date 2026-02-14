@@ -8,10 +8,10 @@
 
   export const questions = [
     { id: 'first-meet', question: 'Where did you see me for the first time?', options: ['My home', 'Your home', 'School Library', 'Playground'], correctIndex: 2 },
-    { id: 'saw-her-first', question: 'Where I saw her first?', options: ['school', 'my home entrance', 'tution', 'your home'], correctIndex: 1 },
-    { id: 'food', question: 'My favourite food?', options: ['biryani', 'dosa', 'shawarma', 'pizza'], correctIndex: 0 },
+    { id: 'saw-her-first', question: 'Which month was it when i proposed you for the very first time?', options: ['Jan', 'March', 'Feb', 'October'], correctIndex: 2 },
+    { id: 'food', question: 'Which scooty did we take to nandi hills?', options: ['Activa', 'Ntorq', 'Dio', 'Jupiter'], correctIndex: 3 },
     { id: 'movie', question: 'What was the first movie we watched together?', options: ['Vaathi', 'Avatar 2', 'Ponniyin selvan', 'Vidamuyarchi'], correctIndex: 2 },
-    { id: 'nickname', question: 'What nickname I call you?', options: ['kutty', 'papa', 'chellam', 'all'], correctIndex: 3 }
+    { id: 'nickname', question: 'When was the very last time you saw me when I was leaving after 10th?', options: ['In my home', '7th camp footpath', 'Your balcony', 'In tuition'], correctIndex: 1 }
   ]
 
 export const sections = [
