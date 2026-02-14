@@ -22,19 +22,28 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState(['', '', '', '', ''])
   const [suggestionsSaved, setSuggestionsSaved] = useState(false)
   const containerRef = useRef(null)
+  const [paintingsReady, setPaintingsReady] = useState(false)
+  const [loadedCount, setLoadedCount] = useState(0)
 
   const totalQuestions = questions.length
   const correctCount = Object.values(answers).filter(a => a?.correct).length
   const resultIndex = sections.findIndex(s => s.type === 'result')
 
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next()
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev()
+useEffect(() => {
+  if (sections[index]?.type === "paintings") {
+    setLoadedCount(0)
+    setPaintingsReady(false)
+  }
+}, [index])
+
+useEffect(() => {
+  if (sections[index]?.type === "paintings") {
+    const total = sections[index].images.length
+    if (loadedCount === total && total > 0) {
+      setPaintingsReady(true)
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [index])
+  }
+}, [loadedCount, index])
 
   function next() { setIndex(i => Math.min(i + 1, sections.length - 1)) }
   function prev() { setIndex(i => Math.max(i - 1, 0)) }
@@ -156,18 +165,35 @@ function getSelected(qId) {
               </div>
             )}
 {sections[index].type === 'paintings' && (
-  <div className="paintings-card">
-    <h3>Bring these paintings to life by clicking on them.</h3>
+  <div className="paintings-card" style={{ position: "relative" }}>
+    <h3>Bring these pictures to life by clicking on them.</h3>
     <p className="hint">This is how you add color to my life.</p>
 
-    <div className="paintings-grid">
+    {/* ONE loader */}
+    {!paintingsReady && (
+      <div className="media-loader">
+        <div className="spinner" />
+      </div>
+    )}
+
+    <div
+      className="paintings-grid"
+      style={{
+        opacity: paintingsReady ? 1 : 0,
+        transition: "opacity .5s ease"
+      }}
+    >
       {sections[index].images.map((src, i) => (
         <div
           key={i}
           className={`painting ${paintingsColored[i] ? 'colored' : ''}`}
           onClick={() => handlePaintClick(i)}
         >
-          <img src={src} alt={`painting ${i + 1}`} />
+          <img
+            src={src}
+            alt={`painting ${i + 1}`}
+            onLoad={() => setLoadedCount(c => c + 1)}
+          />
         </div>
       ))}
     </div>

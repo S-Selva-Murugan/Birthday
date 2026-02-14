@@ -1,7 +1,7 @@
   export const memories = [
   {
     id: 1,
-    title: 'Our First Pic',
+    title: 'Our First Pic...',
     img: '/photos/photo1.jpg',
     caption: [
       "This is the first pic we took together — thanks for loving this thenga manda!",
@@ -13,7 +13,7 @@
       "And now, here we are — together."],
     joke: "I wish I could relive this moment."
   },
-    { id: 2, title: 'Hangouts during college days', img: '/photos/photo2.jpeg', 
+    { id: 2, title: 'Hangouts during college days...', img: '/photos/photo2.jpeg', 
       caption: [
         "After three years, seeing you again felt unreal.",
         "I was nervous — not because you changed, but because you still mattered the same.",
@@ -24,7 +24,7 @@
         "But even distance couldn’t — because we kept choosing each other in every conversation."
       ],
       joke: 'Without you, I would have lived… but I wouldn’t have felt alive the way I do now.' },
-    { id: 3, title: 'The first time I held your hand', img: '/photos/holding-hands.mp4',
+    { id: 3, title: 'The first time I held your hand...', img: '/photos/holding-hands.mp4',
       caption: [
         "The first time I held your hand at Pizza Hut…",
         "I don’t think you realized how big that moment was for me.",
@@ -34,12 +34,20 @@
         "Your hand felt so warm and calm that I didn’t want to let go.",
       ], 
       joke:  "That tiny moment quietly told me… I was exactly where I wanted to be." },
-    { id: 4, title: 'Surprise Picnic2', img: '/photos/photo3.svg', 
-      caption: 'Blanket, cupcakes, and the worst playlist I made', 
-      joke: 'You pretended to love my playlist — bless you' },
-    { id: 5, title: 'Surprise Picnic3', img: '/photos/photo3.svg', 
-      caption: 'Blanket, cupcakes, and the worst playlist I made', 
-      joke: 'You pretended to love my playlist — bless you' }
+    { id: 4, title: 'Somewhere along the way...', img: '/photos/photo7.jpeg', 
+        caption: [
+          "You didn’t change my life suddenly… you slowly became it.",
+          "With you, even ordinary days felt important."
+        ], 
+      joke: "I never chased happiness after you — it started walking beside me." },
+    { id: 5, title: 'You became home...', img: '/photos/photo8.jpeg', 
+        caption: [
+            "Home stopped being a place.",
+            "My day feels incomplete until I talk to you.",
+            "You are the person I update my life to.",
+            "Every future I imagine somehow has you in it.",
+          ], 
+      joke: "I didn’t search for forever… I found you." }
   ]
 
   export const questions = [
