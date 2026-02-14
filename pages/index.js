@@ -24,7 +24,7 @@ export default function Home() {
   const containerRef = useRef(null)
 
   const totalQuestions = questions.length
-  const correctCount = Object.values(answers).filter(Boolean).length
+  const correctCount = Object.values(answers).filter(a => a?.correct).length
   const resultIndex = sections.findIndex(s => s.type === 'result')
 
   useEffect(() => {
@@ -86,6 +86,10 @@ function resetSuggestions() {
   } catch (err) {}
 }
 
+function getSelected(qId) {
+  return answers[qId]?.selected
+}
+
   return (
     <>
       <Head>
@@ -98,29 +102,45 @@ function resetSuggestions() {
         <div className="story-container" ref={containerRef}>
           <div className="story-card" key={index}>
 
-            {sections[index].type === 'question' && (() => {
-              const q = questions[sections[index].qIndex]
-              return (
-                <div className="question-card">
-                  <h3 className="question">{q.question}</h3>
-                  <div className="mcq">
-                    {q.options.map((opt, i) => (
-                      <button
-                        key={i}
-                        className="option"
-                        onClick={() => {
-                          setAnswers(prev => ({ ...prev, [q.id]: i === q.correctIndex }))
-                          if (i === q.correctIndex) setShowConfetti(true)
-                          setTimeout(() => setShowConfetti(false), 900)
-                        }}
-                      >
-                        <span className="opt-num">{i + 1}.</span> {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )
-            })()}
+{sections[index].type === 'question' && (() => {
+  const q = questions[sections[index].qIndex]
+  const selected = getSelected(q.id)
+
+  return (
+    <div className="question-card">
+      <h3 className="question">{q.question}</h3>
+
+      <div className="mcq">
+        {q.options.map((opt, i) => {
+          const isSelected = selected === i
+
+          return (
+            <button
+              key={i}
+              className={`option ${isSelected ? 'selected' : ''}`}
+              onClick={() => {
+                setAnswers(prev => ({
+                  ...prev,
+                  [q.id]: {
+                    selected: i,
+                    correct: i === q.correctIndex
+                  }
+                }))
+              }}
+            >
+              <span className="opt-num">{i + 1}.</span> {opt}
+            </button>
+          )
+        })}
+      </div>
+
+      {selected !== undefined && (
+        <p className="mcq-feedback">You can move to the next →</p>
+      )}
+    </div>
+  )
+})()}
+
 
             {sections[index].type === 'memory' && (
               index > resultIndex
