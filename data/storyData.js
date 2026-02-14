@@ -5,17 +5,11 @@
     img: '/photos/photo1.jpg',
     caption: [
       "This is the first pic we took together — thanks for loving this thenga manda!",
-
       "You were my first crush, my first love… honestly, my everything back then.",
-
       "My feelings were pure and a little crazy, but they were real. My school days felt colourful just because you were in them.",
-
       "I even used to sit in the adjacent desk just so I could see your pretty eyes and your smile a little longer.",
-
       "Then the day came when I had to leave that place… but it felt like I was leaving you forever, and it broke me.",
-
       "Still, somewhere inside, my hopes never died. And somehow… they led me back to you.",
-
       "And now, here we are — together."],
     joke: "I wish I could relive this moment."
   },
@@ -30,9 +24,22 @@
         "But even distance couldn’t — because we kept choosing each other in every conversation."
       ],
       joke: 'Without you, I would have lived… but I wouldn’t have felt alive the way I do now.' },
-    { id: 3, title: 'Surprise Picnic', img: '/photos/photo3.svg', caption: 'Blanket, cupcakes, and the worst playlist I made', joke: 'You pretended to love my playlist — bless you' },
-    { id: 4, title: 'Surprise Picnic2', img: '/photos/photo3.svg', caption: 'Blanket, cupcakes, and the worst playlist I made', joke: 'You pretended to love my playlist — bless you' },
-    { id: 5, title: 'Surprise Picnic3', img: '/photos/photo3.svg', caption: 'Blanket, cupcakes, and the worst playlist I made', joke: 'You pretended to love my playlist — bless you' }
+    { id: 3, title: 'The first time I held your hand', img: '/photos/holding-hands.mp4',
+      caption: [
+        "The first time I held your hand at Pizza Hut…",
+        "I don’t think you realized how big that moment was for me.",
+        "I was trying to act normal, but inside my heart was racing.",
+        "For a few seconds I forgot the food, the noise, and everyone around us.",
+        "The whole place just faded away — it was only you and me.",
+        "Your hand felt so warm and calm that I didn’t want to let go.",
+      ], 
+      joke:  "That tiny moment quietly told me… I was exactly where I wanted to be." },
+    { id: 4, title: 'Surprise Picnic2', img: '/photos/photo3.svg', 
+      caption: 'Blanket, cupcakes, and the worst playlist I made', 
+      joke: 'You pretended to love my playlist — bless you' },
+    { id: 5, title: 'Surprise Picnic3', img: '/photos/photo3.svg', 
+      caption: 'Blanket, cupcakes, and the worst playlist I made', 
+      joke: 'You pretended to love my playlist — bless you' }
   ]
 
   export const questions = [

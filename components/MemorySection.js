@@ -17,7 +17,18 @@ export default function MemorySection({ title, img, caption, joke, children }) {
 
         {/* Photo */}
         <div className="photo">
-          <img src={img} alt={title} loading="lazy" />
+          {img.endsWith(".mp4") || img.endsWith(".webm") ? (
+            <video
+              src={img}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="memory-video"
+            />
+          ) : (
+            <img src={img} alt={title} loading="lazy" className="memory-img" />
+          )}
         </div>
 
         {/* Text Content */}
